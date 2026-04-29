@@ -48,6 +48,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+CORS_ALLOWED_ORIGIN = [
+    "http://localhost:5173/"
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',  # 👈 MOVE HERE
