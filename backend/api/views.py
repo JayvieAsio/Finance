@@ -1,6 +1,8 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
 
-@api_view(['GET'])
-def hello(request):
-    return Response({"message": "Hello from Django"})
+from rest_framework import viewsets
+from .models import Transaction
+from .serializers import TransactionSerializer
+
+class TransactionViewSet(viewsets.ModelViewSet):
+    queryset = Transaction.objects.all().order_by('-date')
+    serializer_class = TransactionSerializer
