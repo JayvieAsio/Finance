@@ -12,9 +12,17 @@ def transactions(request):
 
     elif request.method == 'POST':
         serializer = TransactionSerializer(data=request.data)
-
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-
         return Response(serializer.errors, status=400)
+
+
+@api_view(['DELETE'])
+def delete_transaction(request, pk):
+    try:
+        item = Transaction.objects.get(id=pk)
+        item.delete()
+        return Response({"message": "Deleted"})
+    except:
+        return Response({"error": "Not found"}, status=404)
